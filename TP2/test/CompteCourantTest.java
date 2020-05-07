@@ -2,8 +2,10 @@ import com.cesi.bankonet.CompteCourant;
 import com.cesi.bankonet.exceptions.InvalidAmountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
 public class CompteCourantTest {
 
     private CompteCourant accountWithLimitEquals0andBalanceEquals50;
@@ -11,18 +13,10 @@ public class CompteCourantTest {
 
     @BeforeEach
     public void init(){
-        CompteCourant.resetAccountsNumbers();
         // Arrange
         accountWithLimitEquals0andBalanceEquals50 = new CompteCourant("3JEN", "Compte1", 50, 0);
         accountWithLimitEquals50andBalanceEquals10 = new CompteCourant("3JEF", "Compte2", 10, 50);
 
-    }
-
-    @Test
-    public void should_increaseTotalNumberOfAccounts() {
-
-        // Assert
-        assertEquals(2, CompteCourant.getNbComptesCourants());
     }
 
     @Test
@@ -66,6 +60,7 @@ public class CompteCourantTest {
 
     @Test
     public void decreaseBalance_should_throwInvalidAmountExceptionWhenAmountIsNull(){
+        assertTrue(Objects.deepEquals("test","test"));
         assertThrows(InvalidAmountException.class, () -> accountWithLimitEquals50andBalanceEquals10.decreaseBalance(0));
     }
 }
