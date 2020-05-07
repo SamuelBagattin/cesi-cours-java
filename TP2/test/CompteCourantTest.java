@@ -1,4 +1,5 @@
 import com.cesi.bankonet.CompteCourant;
+import com.cesi.bankonet.exceptions.InvalidAmountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +28,7 @@ public class CompteCourantTest {
     }
 
     @Test
-    public void should_increaseBalanceBy3(){
+    public void should_increaseBalanceBy3() throws InvalidAmountException {
         // Act
         accountWithLimitEquals0andBalanceEquals50.increaseBalance(3);
 
@@ -48,5 +49,15 @@ public class CompteCourantTest {
     public void should_throwExecptionWhenBalanceIsUnderLimit() {
         // Act // Assert
         assertThrows(Exception.class, () -> accountWithLimitEquals0andBalanceEquals50.decreaseBalance(60));
+    }
+
+    @Test
+    public void decreaseBalance_should_throwInvalidAmountExceptionWhenAmountIsNegative(){
+        assertThrows(InvalidAmountException.class, () -> accountWithLimitEquals50andBalanceEquals10.decreaseBalance(-5));
+    }
+
+    @Test
+    public void increaseBalance_should_throwInvalidAmountExceptionWhenAmountIsNegative(){
+        assertThrows(InvalidAmountException.class, () -> accountWithLimitEquals50andBalanceEquals10.increaseBalance(-5));
     }
 }
