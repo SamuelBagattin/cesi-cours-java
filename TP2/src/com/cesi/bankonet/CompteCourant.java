@@ -25,6 +25,9 @@ public class CompteCourant {
 
 
     public void decreaseBalance(int amount) throws Exception {
+        if (amount == 0) {
+            throw new InvalidAmountException("Amount of money should not be null");
+        }
         if (amount < 0) {
             throw new InvalidAmountException("Negative amount of money given : " + amount);
         }
@@ -35,6 +38,9 @@ public class CompteCourant {
     }
 
     public void increaseBalance(int amount) throws InvalidAmountException {
+        if (amount == 0) {
+            throw new InvalidAmountException("Amount of money should not be null");
+        }
         if (amount < 0) {
             throw new InvalidAmountException("Negative amount of money given : " + amount);
         }

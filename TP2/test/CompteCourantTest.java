@@ -60,4 +60,14 @@ public class CompteCourantTest {
     public void increaseBalance_should_throwInvalidAmountExceptionWhenAmountIsNegative(){
         assertThrows(InvalidAmountException.class, () -> accountWithLimitEquals50andBalanceEquals10.increaseBalance(-5));
     }
+
+    @Test
+    public void increaseBalance_should_throwInvalidAmountExceptionWhenAmountIsNull(){
+        assertThrows(InvalidAmountException.class, () -> accountWithLimitEquals50andBalanceEquals10.increaseBalance(0));
+    }
+
+    @Test
+    public void decreaseBalance_should_throwInvalidAmountExceptionWhenAmountIsNull(){
+        assertThrows(InvalidAmountException.class, () -> accountWithLimitEquals50andBalanceEquals10.decreaseBalance(0));
+    }
 }
