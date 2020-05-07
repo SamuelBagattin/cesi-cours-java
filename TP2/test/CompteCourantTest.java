@@ -1,18 +1,26 @@
 import com.cesi.bankonet.CompteCourant;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CompteCourantTest {
 
-    @Test
-    public void should_increaseTotalNumberOfAccounts() {
+    private CompteCourant accountWithLimitEquals0andBalanceEquals50;
+    private CompteCourant accountWithLimitEquals50andBalanceEquals10;
+    private CompteCourant testAccount;
+
+    @BeforeEach
+    public void init(){
         CompteCourant.nbComptesCourants = 0;
         // Arrange
-        var compteCourant1 = new CompteCourant("3JEN", "Compte1", 400000, 0);
-        var compteCourant2 = new CompteCourant("3JEF", "Compte2", 455667, 0);
-        var compteCourant3 = new CompteCourant("3JEG", "Compte3", 2, 0);
+        accountWithLimitEquals0andBalanceEquals50 = new CompteCourant("3JEN", "Compte1", 50, 0);
+        accountWithLimitEquals50andBalanceEquals10 = new CompteCourant("3JEF", "Compte2", 10, 50);
+        testAccount = new CompteCourant("3JEG", "Compte3", 2, 0);
 
-        // Act
+    }
+
+    @Test
+    public void should_increaseTotalNumberOfAccounts() {
 
         // Assert
         assertEquals(3, CompteCourant.nbComptesCourants);
@@ -20,34 +28,25 @@ public class CompteCourantTest {
 
     @Test
     public void should_increaseBalanceBy3(){
-        // Arrange
-        var account = new CompteCourant("3EEE", "Account1", 50, 0);
-
         // Act
-        account.increaseBalance(3);
+        accountWithLimitEquals0andBalanceEquals50.increaseBalance(3);
 
         // Assert
-        assertEquals(53, account.balance);
+        assertEquals(53, accountWithLimitEquals0andBalanceEquals50.balance);
     }
 
     @Test
     public void should_decreaseBalanceBy4() throws Exception {
-        // Arrange
-        var account = new CompteCourant("3EEE", "Account1", 50, 0);
-
         // Act
-        account.decreaseBalance(4);
+        accountWithLimitEquals0andBalanceEquals50.decreaseBalance(4);
 
         // Assert
-        assertEquals(46, account.balance);
+        assertEquals(46, accountWithLimitEquals0andBalanceEquals50.balance);
     }
 
     @Test
     public void should_throwExecptionWhenBalanceIsUnderLimit() {
-        // Arrange
-        var account = new CompteCourant("3EEE", "Account1", 50, 0);
-
         // Act // Assert
-        assertThrows(Exception.class, () -> account.decreaseBalance(60));
+        assertThrows(Exception.class, () -> accountWithLimitEquals0andBalanceEquals50.decreaseBalance(60));
     }
 }
