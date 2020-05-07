@@ -8,15 +8,13 @@ public class CompteCourantTest {
 
     private CompteCourant accountWithLimitEquals0andBalanceEquals50;
     private CompteCourant accountWithLimitEquals50andBalanceEquals10;
-    private CompteCourant testAccount;
 
     @BeforeEach
     public void init(){
-        CompteCourant.nbComptesCourants = 0;
+        CompteCourant.resetAccountsNumbers();
         // Arrange
         accountWithLimitEquals0andBalanceEquals50 = new CompteCourant("3JEN", "Compte1", 50, 0);
         accountWithLimitEquals50andBalanceEquals10 = new CompteCourant("3JEF", "Compte2", 10, 50);
-        testAccount = new CompteCourant("3JEG", "Compte3", 2, 0);
 
     }
 
@@ -24,7 +22,7 @@ public class CompteCourantTest {
     public void should_increaseTotalNumberOfAccounts() {
 
         // Assert
-        assertEquals(3, CompteCourant.nbComptesCourants);
+        assertEquals(2, CompteCourant.getNbComptesCourants());
     }
 
     @Test
@@ -33,7 +31,7 @@ public class CompteCourantTest {
         accountWithLimitEquals0andBalanceEquals50.increaseBalance(3);
 
         // Assert
-        assertEquals(53, accountWithLimitEquals0andBalanceEquals50.balance);
+        assertEquals(53, accountWithLimitEquals0andBalanceEquals50.getBalance());
     }
 
     @Test
@@ -42,7 +40,7 @@ public class CompteCourantTest {
         accountWithLimitEquals0andBalanceEquals50.decreaseBalance(4);
 
         // Assert
-        assertEquals(46, accountWithLimitEquals0andBalanceEquals50.balance);
+        assertEquals(46, accountWithLimitEquals0andBalanceEquals50.getBalance());
     }
 
     @Test

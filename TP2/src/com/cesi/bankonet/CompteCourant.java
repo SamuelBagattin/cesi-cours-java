@@ -2,14 +2,12 @@ package com.cesi.bankonet;
 
 import com.cesi.bankonet.exceptions.InvalidAmountException;
 
-import java.lang.reflect.Constructor;
-
 public class CompteCourant {
-    public String numero;
-    public String intitule;
-    public double balance;
-    public double montantDecouvertAutorise;
-    public static int nbComptesCourants = 0;
+    private final String numero;
+    private final String intitule;
+    private double balance;
+    private final double montantDecouvertAutorise;
+    private static int nbComptesCourants = 0;
 
     public CompteCourant() {
         this("Undefined", "Undefined", 0, 0);
@@ -56,4 +54,31 @@ public class CompteCourant {
                 ", montantDecouvertAutorise=" + montantDecouvertAutorise +
                 '}';
     }
+
+    public static void resetAccountsNumbers(){
+        CompteCourant.nbComptesCourants = 0;
+    }
+
+    //<editor-fold desc="Getters and setters">
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getIntitule() {
+        return intitule;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getMontantDecouvertAutorise() {
+        return montantDecouvertAutorise;
+    }
+
+    public static int getNbComptesCourants() {
+        return nbComptesCourants;
+    }
+    //</editor-fold>
+
 }
